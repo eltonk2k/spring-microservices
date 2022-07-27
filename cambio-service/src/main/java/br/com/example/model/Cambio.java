@@ -3,24 +3,43 @@ package br.com.example.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity(name = "cambio")
 public class Cambio implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	private Long ind;
+	@Column(name= "from_currency", nullable = false, length = 3)
 	private String from;
+	
+	@Column(name= "to_currency", nullable = false, length = 3)
 	private String to;
+	
+	@Column(nullable = false)
 	private BigDecimal conversionFactor;
+	
+	@Transient
 	private BigDecimal convertedValue;
+	
+	@Transient
 	private String environment;
 	
 	
 	public Cambio() {
 	}
 	
-	public Cambio(Long ind, String from, String to, BigDecimal conversionFactor, BigDecimal convertedValue,
+	public Cambio(Long id, String from, String to, BigDecimal conversionFactor, BigDecimal convertedValue,
 			String environment) {
-		this.ind = ind;
+		this.id = id;
 		this.from = from;
 		this.to = to;
 		this.conversionFactor = conversionFactor;
@@ -28,12 +47,12 @@ public class Cambio implements Serializable {
 		this.environment = environment;
 	}
 
-	public Long getInd() {
-		return ind;
+	public Long getId() {
+		return id;
 	}
 
-	public void setInd(Long ind) {
-		this.ind = ind;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFrom() {
@@ -84,7 +103,7 @@ public class Cambio implements Serializable {
 		result = prime * result + ((convertedValue == null) ? 0 : convertedValue.hashCode());
 		result = prime * result + ((environment == null) ? 0 : environment.hashCode());
 		result = prime * result + ((from == null) ? 0 : from.hashCode());
-		result = prime * result + ((ind == null) ? 0 : ind.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((to == null) ? 0 : to.hashCode());
 		return result;
 	}
@@ -118,10 +137,10 @@ public class Cambio implements Serializable {
 				return false;
 		} else if (!from.equals(other.from))
 			return false;
-		if (ind == null) {
-			if (other.ind != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!ind.equals(other.ind))
+		} else if (!id.equals(other.id))
 			return false;
 		if (to == null) {
 			if (other.to != null)
