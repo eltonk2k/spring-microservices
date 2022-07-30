@@ -24,3 +24,6 @@ spring:
     schemas: cambio_service
     user: root
     password: 123456
+springdoc:
+  api-docs:
+    path: cambio-service/v3/api-docs
