@@ -11,7 +11,10 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name="Foo-Bar")
 @RestController
 @RequestMapping("book-service")
 public class FooBarController {
@@ -19,6 +22,7 @@ public class FooBarController {
 	private Logger logger = LoggerFactory.getLogger(FooBarController.class);
 	
 	
+	@Operation(summary = "Find a specific book by your ID")
 	@GetMapping("/foo-bar")
 	//@Retry(name="foo-bar", fallbackMethod = "fallbackMethod")
 	//@CircuitBreaker(name="default", fallbackMethod = "fallbackMethod")
