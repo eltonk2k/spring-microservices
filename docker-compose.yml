@@ -6,7 +6,7 @@ services:
     ports:
       - 8761:8761
     networks:
-      - erudio-network
+      - elton-network
 networks:
   erudio-network:
     driver: bridge
