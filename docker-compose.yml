@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  naming-server:
+    image: eltonk2k/naming-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+    networks:
+      - erudio-network
+networks:
+  erudio-network:
+    driver: bridge
