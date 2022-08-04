@@ -1,12 +1,20 @@
 version: '3.4'
 
 services:
+  zipkin-server:
+    image: openzipkin/zipkin:2.23.2
+    ports:
+      - 9411:9411
+    networks:
+      - elton-network
+
   naming-server:
     image: eltonk2k/naming-server:0.0.1-SNAPSHOT
     ports:
       - 8761:8761
     networks:
       - elton-network
+
 networks:
-  erudio-network:
+  elton-network:
     driver: bridge
