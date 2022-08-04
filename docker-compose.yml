@@ -14,6 +14,19 @@ services:
       - 8761:8761
     networks:
       - elton-network
+      
+  api-gateway:
+    image: eltonk2k/api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - 8765:8765
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN:BASEURL: http://zipkin-server:9411/
+    networks:
+      - elton-network
+  
 
 networks:
   elton-network:
