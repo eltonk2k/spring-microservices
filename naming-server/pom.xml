@@ -9,7 +9,7 @@
 		<version>2.5.0-M3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.erudio</groupId>
+	<groupId>br.com.example</groupId>
 	<artifactId>naming-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>naming-server</name>
