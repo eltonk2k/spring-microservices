@@ -14,29 +14,31 @@ import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name="Foo-Bar")
+@Tag(name = "Foo-Bar")
 @RestController
 @RequestMapping("book-service")
 public class FooBarController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(FooBarController.class);
-	
-	
-	@Operation(summary = "Find a specific book by your ID")
+
 	@GetMapping("/foo-bar")
-	//@Retry(name="foo-bar", fallbackMethod = "fallbackMethod")
-	//@CircuitBreaker(name="default", fallbackMethod = "fallbackMethod")
-	//@RateLimiter(name="default")
-	@Bulkhead(name="default")
+	@Operation(summary = "Foo bar")
+	//@Retry(name = "foo-bar", fallbackMethod = "fallbackMethod")
+	//@CircuitBreaker(name = "default", fallbackMethod = "fallbackMethod")
+	//@RateLimiter(name = "default")
+	@Bulkhead(name = "default")
 	public String fooBar() {
 		logger.info("Request to foo-bar is received!");
-		//var response = new RestTemplate().getForEntity("http://localhost:8080/foo-bar", String.class);
-		return "FooBar!!!";
+		/*
+		 * var response = new RestTemplate()
+		 * .getForEntity("http://localhost:8080/foo-bar", String.class);
+		 */
+		return "Foo-Bar!!!";
 		//return response.getBody();
 	}
 	
 	public String fallbackMethod(Exception ex) {
-		return "fallbackMethod foo-bar!";
+		return "fallbackMethod foo-bar!!!";
 	}
 
 }

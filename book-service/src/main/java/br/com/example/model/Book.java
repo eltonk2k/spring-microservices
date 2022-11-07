@@ -15,18 +15,18 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name = "book")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Book implements Serializable {
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="author", nullable = false, length = 180)
+	@Column(name = "author", nullable = false, length = 180)
 	private String author;
 	
-	@Column(name = "launch_Date", nullable = false)
+	@Column(name = "launch_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date launchDate;
 	
@@ -42,91 +42,76 @@ public class Book implements Serializable {
 	@Transient
 	private String environment;
 	
-	public Book() {
-	}
-	
-	
-	public Book(Long id, String author, String title, Date launchDate, Double price, String currency,
+	public Book() {}
+
+	public Book(Long id, String author, String title,
+			Date launchDate, Double price,
+			String currency,
 			String environment) {
 		this.id = id;
 		this.author = author;
-		this.title = title;
 		this.launchDate = launchDate;
 		this.price = price;
+		this.title = title;
 		this.currency = currency;
 		this.environment = environment;
 	}
-
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getAuthor() {
 		return author;
 	}
 
-
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
 
 	public Date getLaunchDate() {
 		return launchDate;
 	}
 
-
 	public void setLaunchDate(Date launchDate) {
 		this.launchDate = launchDate;
 	}
-
 
 	public Double getPrice() {
 		return price;
 	}
 
-
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public String getCurrency() {
 		return currency;
 	}
 
-
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-
 
 	public String getEnvironment() {
 		return environment;
 	}
 
-
 	public void setEnvironment(String environment) {
 		this.environment = environment;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -141,7 +126,6 @@ public class Book implements Serializable {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -189,6 +173,4 @@ public class Book implements Serializable {
 			return false;
 		return true;
 	}
-	
-
 }

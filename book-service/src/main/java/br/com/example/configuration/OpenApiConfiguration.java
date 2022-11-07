@@ -10,15 +10,12 @@ import io.swagger.v3.oas.models.info.License;
 
 @OpenAPIDefinition(info = @Info(title = "Book Service API", version = "v1", description = "Documentation of book Service API"))
 public class OpenApiConfiguration {
-	
+
 	@Bean
 	public OpenAPI customOpenAPI() {
-		return new OpenAPI()
-			.components(new Components())
-			.info(new io.swagger.v3.oas.models.info.Info()
-					.title("Book Service API")
-					.version("v1")
-					.license(new License().name("Apache 2.0").url("http://springdoc.org")));
+		return new OpenAPI().components(new Components())
+				.info(new io.swagger.v3.oas.models.info.Info().title("Book Service API").version("v1")
+						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}
 
 }

@@ -4,20 +4,18 @@ import java.io.Serializable;
 
 public class Cambio implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String from;
 	private String to;
 	private Double conversionFactor;
 	private Double convertedValue;
 	private String environment;
-	
-	
+
 	public Cambio() {
-	}
-	
-	public Cambio(Long id, String from, String to, Double conversionFactor, Double convertedValue,
-			String environment) {
+	};
+
+	public Cambio(Long id, String from, String to, Double conversionFactor, Double convertedValue, String environment) {
 		this.id = id;
 		this.from = from;
 		this.to = to;
@@ -128,6 +126,5 @@ public class Cambio implements Serializable {
 			return false;
 		return true;
 	}
-	
 
 }

@@ -5,13 +5,14 @@ services:
     image: openzipkin/zipkin:2.23.2
     ports:
       - 9411:9411
+    restart: always
     depends_on:
       - rabbit-mq
     environment:
-      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672
+      RABBIT_URI: amqp://admin:admin@rabbit-mq:5672
     networks:
       - elton-network
-      
+
   rabbit-mq:
     image: rabbitmq:3.8.14-management
     ports:
@@ -19,7 +20,7 @@ services:
       - 15672:15672
     networks:
       - elton-network
-      
+
   cambio-db:
     image: mysql:5.7.22
     command: --default-authentication-plugin=mysql_native_password
@@ -64,7 +65,23 @@ services:
       - 8761:8761
     networks:
       - elton-network
-  
+
+  api-gateway:
+    image: eltonk2k/api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - 8765:8765
+    depends_on:
+      - naming-server
+      - rabbit-mq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURIO: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672
+      SPRING_RABBITMQ_HOST: rabbit-mq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+    networks:
+      - elton-network
+
   cambio-service:
     image: eltonk2k/cambio-service
     restart: always
@@ -120,28 +137,6 @@ services:
       - rabbit-mq
     networks:
       - elton-network
-networks:
-  erudio-network:
-    driver: bridge
-
-   
-  api-gateway:
-    image: eltonk2k/api-gateway:0.0.1-SNAPSHOT
-    ports:
-      - 8765:8765
-    depends_on:
-      - naming-server
-      - rabbit-mq
-    environment:
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN:BASEURL: http://zipkin-server:9411/
-      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672
-      SPRING_RABBITMQ_HOST: rabbit-mq
-      SPRING_ZIPKIN_SENDER_TYPE: rabbit
-    networks:
-      - elton-network
-  
-
 networks:
   elton-network:
     driver: bridge
